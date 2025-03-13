@@ -1,20 +1,19 @@
 package com.twitterClone.twitterClone.dto;
 
-
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CommentRequest {
-    @NotBlank
-    @NotNull
+public class CommentResponse {
+    private Long id;
     private String content;
-
-    @NotNull
     private Long tweetId;
+    private Long userId;
+    private LocalDateTime createdAt;
 }
+
