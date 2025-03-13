@@ -1,6 +1,7 @@
 package com.twitterClone.twitterClone.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,5 +25,6 @@ public class Retweet {
 
     @ManyToOne
     @JoinColumn(name = "tweet_id")
+    @JsonBackReference
     private Tweet tweet;
 }

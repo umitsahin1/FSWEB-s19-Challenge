@@ -1,6 +1,7 @@
 package com.twitterClone.twitterClone.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -36,5 +37,6 @@ public class Comment {
 
     @ManyToOne
     @JoinColumn(name = "tweet_id")
+    @JsonBackReference
     private Tweet tweet;
 }

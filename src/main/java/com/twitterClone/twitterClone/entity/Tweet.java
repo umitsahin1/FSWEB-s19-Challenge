@@ -1,8 +1,10 @@
 package com.twitterClone.twitterClone.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,6 +29,9 @@ public class Tweet {
 
 
     @Column(name = "content")
+    @Size(max = 280)
+    @NotBlank
+    @NotNull
     private String content;
 
     @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,CascadeType.PERSIST,CascadeType.REFRESH})
@@ -34,11 +39,14 @@ public class Tweet {
     private User user;
 
     @OneToMany(mappedBy = "tweet", cascade = CascadeType.ALL )
+    @JsonManagedReference
     private List<Comment> comments;
 
     @OneToMany(mappedBy = "tweet", cascade = CascadeType.ALL )
+    @JsonManagedReference
     private List<Like> likes;
 
     @OneToMany(mappedBy = "tweet", cascade = CascadeType.ALL )
+    @JsonManagedReference
     private List<Retweet> retweets;
 }
