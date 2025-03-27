@@ -5,11 +5,14 @@
 /Users/umitsahin/Documents/GitHub/FSWEB-s19-Challenge/src/main/java/com/twitterClone/twitterClone/controller/LikeController.java
 /Users/umitsahin/Documents/GitHub/FSWEB-s19-Challenge/src/main/java/com/twitterClone/twitterClone/controller/RetweetController.java
 /Users/umitsahin/Documents/GitHub/FSWEB-s19-Challenge/src/main/java/com/twitterClone/twitterClone/controller/TweetController.java
+/Users/umitsahin/Documents/GitHub/FSWEB-s19-Challenge/src/main/java/com/twitterClone/twitterClone/dto/CommentRequest.java
+/Users/umitsahin/Documents/GitHub/FSWEB-s19-Challenge/src/main/java/com/twitterClone/twitterClone/dto/CommentResponse.java
 /Users/umitsahin/Documents/GitHub/FSWEB-s19-Challenge/src/main/java/com/twitterClone/twitterClone/dto/LoginDto.java
 /Users/umitsahin/Documents/GitHub/FSWEB-s19-Challenge/src/main/java/com/twitterClone/twitterClone/dto/RegisterCreateDto.java
 /Users/umitsahin/Documents/GitHub/FSWEB-s19-Challenge/src/main/java/com/twitterClone/twitterClone/dto/RegisterDto.java
 /Users/umitsahin/Documents/GitHub/FSWEB-s19-Challenge/src/main/java/com/twitterClone/twitterClone/dto/TweetRequest.java
 /Users/umitsahin/Documents/GitHub/FSWEB-s19-Challenge/src/main/java/com/twitterClone/twitterClone/dto/TweetResponse.java
+/Users/umitsahin/Documents/GitHub/FSWEB-s19-Challenge/src/main/java/com/twitterClone/twitterClone/dto/UserDto.java
 /Users/umitsahin/Documents/GitHub/FSWEB-s19-Challenge/src/main/java/com/twitterClone/twitterClone/entity/Comment.java
 /Users/umitsahin/Documents/GitHub/FSWEB-s19-Challenge/src/main/java/com/twitterClone/twitterClone/entity/Like.java
 /Users/umitsahin/Documents/GitHub/FSWEB-s19-Challenge/src/main/java/com/twitterClone/twitterClone/entity/Retweet.java
