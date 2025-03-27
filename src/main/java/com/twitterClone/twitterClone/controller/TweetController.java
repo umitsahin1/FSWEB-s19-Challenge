@@ -10,9 +10,13 @@ import com.twitterClone.twitterClone.repository.LikeRepository;
 import com.twitterClone.twitterClone.repository.RetweetRepository;
 import com.twitterClone.twitterClone.repository.UserRepository;
 import com.twitterClone.twitterClone.service.TweetService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,7 +48,7 @@ public class TweetController  {
                             tweet.getId(),
                             tweet.getContent(),
                             tweet.getCreatedAt(),
-                            tweet.getUser().getUsername(),
+                            tweet.getUser().getUserNameReal(),
                             likeCount,
                             retweetCount,
                             commentCount
@@ -64,7 +68,7 @@ public class TweetController  {
                             tweet.getId(),
                             tweet.getContent(),
                             tweet.getCreatedAt(),
-                            tweet.getUser().getUsername(),
+                            tweet.getUser().getUserNameReal(),
                             likeCount,
                             retweetCount,
                             commentCount
@@ -84,7 +88,7 @@ public class TweetController  {
                 tweet.getId(),
                 tweet.getContent(),
                 tweet.getCreatedAt(),
-                tweet.getUser().getUsername(),
+                tweet.getUser().getUserNameReal(),
                 likeCount,
                 retweetCount,
                 commentCount
@@ -109,8 +113,19 @@ public class TweetController  {
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Transactional
     public void delete(@PathVariable Long id) {
-        tweetService.deleteById(id);
-    }
 
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUsername = authentication.getName();
+
+        Tweet tweet = tweetService.getById(id);
+
+
+        if (tweet.getUser().getEmail().equals(currentUsername)) {
+            tweetService.deleteById(id);
+        } else {
+            throw new AccessDeniedException("Bu tweet'i silme izniniz yok.");
+        }
+    }
 }

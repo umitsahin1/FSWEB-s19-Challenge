@@ -27,21 +27,29 @@ public class  AuthController {
     @PostMapping("/register")
     public RegisterDto register(@Validated @RequestBody RegisterCreateDto registerCreateDto) {
         User user = authService.register(registerCreateDto.getUsername(),registerCreateDto.getEmail(), registerCreateDto.getPassword());
-        return new RegisterDto(user.getEmail(),user.getUsername() );
+        return new RegisterDto(user.getEmail(),user.getUserNameReal() );
     }
 
     @PostMapping("/login")
-    public UserDto login(@RequestBody LoginDto loginDto) {
+    public UserDto login(@RequestBody LoginDto loginDto,HttpServletRequest request) {
         User user= authService.login(loginDto.getEmail(), loginDto.getPassword());
-        return new UserDto(user.getId(),user.getUsername(),user.getEmail());
+
+        HttpSession session = request.getSession(true);
+        session.setAttribute("user", user);
+
+        return new UserDto(user.getId(),user.getUserNameReal(),user.getEmail());
     }
 
     @GetMapping("/check")
-    public ResponseEntity<Boolean> checkAuth(HttpServletRequest request) {
+    public ResponseEntity<UserDto> checkAuth(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        if (session != null && session.getAttribute("user") != null) {
-            return ResponseEntity.ok(true);
+        if (session != null) {
+            User user = (User) session.getAttribute("user");
+            if (user != null) {
+                return ResponseEntity.ok(new UserDto(user.getId(), user.getUserNameReal(), user.getEmail()));
+            }
         }
-        return ResponseEntity.ok(false);
+        return ResponseEntity.status(401).build(); // Unauthorized
     }
+
 }
